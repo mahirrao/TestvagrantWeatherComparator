@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,11 +42,11 @@ public class Page
 
 	private static final String excelFileName = "testData.xlsx";
 	public static final String baseDir = System.getProperty("user.dir");
-	public static final String propertiesDir = "src\\test\\resources\\com\\testvagrant\\properties";
+	public static final String propertiesDir = "\\src\\test\\resources\\com\\testvagrant\\properties\\";
 	public static final String reportsDir = "\\reports";
 	public static final String screenshotsDir = "\\reports\\screenshots";
 	
-	public static final String excelDir = "\\src\\test\\resources\\prac\\mda\\excel\\";
+	public static final String excelDir = "\\src\\test\\resources\\com\\testvagrant\\excel\\";
 
 	public static WebDriver driver;
 	public static WebDriverWait wait;
@@ -69,7 +70,7 @@ public class Page
 	public static void initConfiguration()
 	{
 		try {
-			fis = new FileInputStream(baseDir + propertiesDir + "Config.properties");
+			fis = new FileInputStream(baseDir + propertiesDir + "config.properties");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,6 +107,7 @@ public class Page
 
 		driver.get(config.getProperty("testURL"));
 		driver.manage().window().maximize();
+		builder = new Actions(driver);
 	}
 
 	private static void launchFirefoxBrowser()
@@ -190,14 +192,26 @@ public class Page
 	{
 		elements.get(index).click();
 		log.info("Clicking on " + index + " Element from the list: " + elements);
-		testReport.get().log(Status.INFO, "Clicking on " + index + " Element from the list: " + elements);
+//		testReport.get().log(Status.INFO, "Clicking on " + index + " Element from the list: " + elements);
 	}
 
 	public static void type(WebElement element, String value)
 	{
 		element.sendKeys(value);
 		log.info("Typing in an Element : " + element + " entered value as : " + value);
-		testReport.get().log(Status.INFO, "Typing in : " + element + " entered value as " + value);
+//		testReport.get().log(Status.INFO, "Typing in : " + element + " entered value as " + value);
 	}
 
+	public static void type(WebElement element, Keys key)
+	{
+		element.sendKeys(key);
+		log.info("Entered the key: " + key + " for Element : " + element);
+//		testReport.get().log(Status.INFO, "Entered the key: " + key + " for Element : " + element);
+	}
+	
+	public static void pressKey(WebElement element, Keys key)
+	{
+		builder.moveToElement(element).sendKeys(key).perform();
+		log.info("Entered the key: " + key + " for Element : " + element);
+	}
 }
