@@ -1,6 +1,8 @@
 package com.testvagrant.pages.actions;
 
-public class HomePage
-{
+import com.testvagrant.base.Page;
 
+public class HomePage extends Page
+{
+	
 }
