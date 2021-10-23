@@ -43,8 +43,8 @@ public class Page
 	private static final String excelFileName = "testData.xlsx";
 	public static final String baseDir = System.getProperty("user.dir");
 	public static final String propertiesDir = "\\src\\test\\resources\\com\\testvagrant\\properties\\";
-	public static final String reportsDir = "\\reports";
-	public static final String screenshotsDir = "\\reports\\screenshots";
+	public static final String reportsDir = "\\reports\\";
+	public static final String screenshotsDir = "\\reports\\screenshots\\";
 	
 	public static final String excelDir = "\\src\\test\\resources\\com\\testvagrant\\excel\\";
 
@@ -60,7 +60,7 @@ public class Page
 	static public Properties config = new Properties();
 	public static ExcelReader excelPath = new ExcelReader(baseDir + excelDir + excelFileName);
 	public static String datePattern = "dd-MMM-yyyy_HH-mm-ss-SSS_z";
-	private static String reportName = "ExtentReport.html";// "Extent_" + getCurrentDataTime() + ".html";
+	private static String reportName = "Extent_" + getCurrentDataTime() + ".html";
 	public static ExtentReports extentReport = ExtentManager.getInstance(baseDir + reportsDir + reportName);
 	public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<ExtentTest>();
 	public static ExtentTest test;
@@ -192,21 +192,21 @@ public class Page
 	{
 		elements.get(index).click();
 		log.info("Clicking on " + index + " Element from the list: " + elements);
-//		testReport.get().log(Status.INFO, "Clicking on " + index + " Element from the list: " + elements);
+		testReport.get().log(Status.INFO, "Clicking on " + index + " Element from the list: " + elements);
 	}
 
 	public static void type(WebElement element, String value)
 	{
 		element.sendKeys(value);
 		log.info("Typing in an Element : " + element + " entered value as : " + value);
-//		testReport.get().log(Status.INFO, "Typing in : " + element + " entered value as " + value);
+		testReport.get().log(Status.INFO, "Typing in : " + element + " entered value as " + value);
 	}
 
 	public static void type(WebElement element, Keys key)
 	{
 		element.sendKeys(key);
 		log.info("Entered the key: " + key + " for Element : " + element);
-//		testReport.get().log(Status.INFO, "Entered the key: " + key + " for Element : " + element);
+		testReport.get().log(Status.INFO, "Entered the key: " + key + " for Element : " + element);
 	}
 	
 	public static void pressKey(WebElement element, Keys key)
