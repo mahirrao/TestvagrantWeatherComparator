@@ -20,11 +20,11 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.testvagrant.base.Page;
+import com.testvagrant.base.Project;
 import com.testvagrant.utilities.Utilities;
 
 
-public class CustomListeners extends Page implements ITestListener, ISuiteListener
+public class CustomListeners extends Project implements ITestListener, ISuiteListener
 {
 	static String messageBody;
 	
@@ -36,6 +36,7 @@ public class CustomListeners extends Page implements ITestListener, ISuiteListen
 		String methodName=result.getMethod().getMethodName();
 		String logText="<b>"+"TEST CASE:- "+ methodName.toUpperCase()+ " EXECUTION STARTED";
 		testReport.get().log(Status.INFO, logText);
+		
 	}
 
 	public void onTestSuccess(ITestResult result)

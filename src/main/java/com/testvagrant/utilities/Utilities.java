@@ -3,6 +3,8 @@ package com.testvagrant.utilities;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 
 import org.apache.commons.io.FileUtils;
@@ -11,10 +13,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.annotations.DataProvider;
 
 import com.testvagrant.base.Page;
+import com.testvagrant.base.Project;
+
+import io.restassured.path.json.JsonPath;
 
 
 
-public class Utilities extends Page
+public class Utilities extends Project
 {
 	public static String screenShotName;
 	public static String screenShotPath;
@@ -24,7 +29,7 @@ public class Utilities extends Page
 		screenShotName = "Error_" + getCurrentDataTime() + ".jpg";
 		screenShotPath = baseDir + reportsDir + screenShotName;
 		
-		File ssFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		File ssFile = ((TakesScreenshot)Page.driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(ssFile, new File(screenShotPath));
 	}
 	
@@ -57,4 +62,19 @@ public class Utilities extends Page
 		
 		return menuItems;		
 	}
+	
+	public static JsonPath rawToJson(String response)
+	{
+		JsonPath js = new JsonPath(response);
+		return js;
+	}
+	
+	public static String getCurrentDataTime()
+	{
+		Date date = new Date();
+		SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+		String currentDateTime = dateFormatter.format(date);
+		return currentDateTime;
+	}
+
 }
