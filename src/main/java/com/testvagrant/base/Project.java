@@ -28,8 +28,9 @@ public class Project
 	static public Properties prop = new Properties();
 	public static ExcelReader excelPath = new ExcelReader(baseDir + excelDir + excelFileName);
 	public static String datePattern = "dd-MMM-yyyy_HH-mm-ss-SSS_z";
+	public static String shortDatePattern = "dd-MMM_HH-mm-ss";
 	public static Logger log = Logger.getLogger("mayureshLogger");
-	private static String reportName = "Extent_" + Utilities.getCurrentDataTime() + ".html";
+	private static String reportName = "Extent_" + Utilities.getCurrentDataTime(datePattern) + ".html";
 	public static ExtentReports extentReport = ExtentManager.getInstance(baseDir + reportsDir + reportName);
 	public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<ExtentTest>();
 	public static ExtentTest test;

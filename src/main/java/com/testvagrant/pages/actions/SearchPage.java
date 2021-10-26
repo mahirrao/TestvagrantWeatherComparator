@@ -20,6 +20,8 @@ public class SearchPage extends Page
 	public String getCurrentTemperature()
 	{
 		String currentTemp = search.currentTemp.getText();
+		currentTemp = currentTemp.split("°")[0];
+		driver.navigate().back();
 		return currentTemp;
 	}
 }
